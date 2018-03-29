@@ -1,0 +1,29 @@
+* {
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+h1 {
+  color: blue;
+}
+
+p {
+  font-size: 40px;
+}
+
+#parrafo1 {
+  color: pink;
+  text-align: center;
+  text-decoration: underline;
+}
+
+img {
+  text-align: center;
+}
+
+.importante {
+  font-size: 80px;
+  /* color: brown; */
+}
+ul {
+  list-style-type: square;
+}
