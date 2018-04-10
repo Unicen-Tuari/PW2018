@@ -1,3 +1,7 @@
+body{
+  min-width:600px;
+}
+
 div.encabezado {
   position: relative;
   height: 150px;
@@ -42,12 +46,12 @@ div.centro {
 
 div.derecha {
   float: right;
-  width: 200px;
+  width: 150px;
   background-color: #666666;
   color: white;
 }
 div.pie {
-  clear:both ;
+  clear: both ;
   display: block;
   background-color: #00CCFF;
 }
