@@ -5,3 +5,11 @@ td {
 .encabezado {
   font-weight: bold;
 }
+
+p {
+  font-size: xx-small;
+}
+
+div {
+  font-size: 2em;
+}
