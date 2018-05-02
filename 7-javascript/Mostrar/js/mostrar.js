@@ -10,7 +10,7 @@ function cuentaRegresiva(tiempo){
     document.querySelector('h1').innerHTML = tiempo;
     if (tiempo === 0){
         clearInterval(intervalo);
-        alert('BOOOM');
+        alert('BOOM');
     }
     else{
       tiempo--;
