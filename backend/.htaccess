@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -l
+  RewriteRule ^[css|img|js].*$ - [L]
+  # Con ".*" decimos que capture todos los caracteres restantes.
+  # Los paréntesis agregan lo capturado a una variable: $1 por ser la primera.
+  RewriteRule ^(.*)$ route.php?action=$1 [QSA,L]
+</IfModule>
