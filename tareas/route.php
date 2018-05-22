@@ -6,6 +6,6 @@
   $action = $params[0];
   $others = array_slice($params, 1, count($params));
   $funcion = "error";
-  $funcion = acciones[$action];
+  $funcion = $acciones[$action];
   $funcion($others);
 ?>
