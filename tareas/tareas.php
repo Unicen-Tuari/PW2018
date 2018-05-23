@@ -12,7 +12,7 @@ DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/
     $tareas = obtenerTareas();
 
     foreach ($tareas as $tarea) {
-      echo '<li>'.$tarea['titulo'].': '.$tarea['descripcion'].'</li>';
+      echo '<li>'.$tarea['titulo'].': '.$tarea['descripcion'].' <a href="borrar/'.$tarea['id'].'">Borrar</a></li>';
     }
 
     //for
@@ -53,7 +53,8 @@ DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/
 
   function borrarTarea($params = [])
   {
-    // code...
+    deleteTarea($params[0]);
+    header("Location: ".BASEURL."ver");
   }
 
 ?>
