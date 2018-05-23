@@ -24,7 +24,7 @@ DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/
       if ($tarea['finalizada'] == 1){
         echo ' class="tachado"';
       }
-      echo '>'.$tarea['titulo'].': '.$tarea['descripcion'].' <a href="borrar/'.$tarea['id'].'">Borrar</a> <a href="finalizar/'.$tarea['id'].'">Finalizar</a></li>';
+      echo '><a href="detalle/'.$tarea['id'].'">'.$tarea['titulo'].'</a>: '.$tarea['descripcion'].' <a href="borrar/'.$tarea['id'].'">Borrar</a> <a href="finalizar/'.$tarea['id'].'">Finalizar</a></li>';
     }
     ?>
 
@@ -73,8 +73,20 @@ DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/
     homePage();
   }
 
-  function homePage(){
+  function homePage()
+  {
     header("Location: ".BASEURL."ver");
+  }
+
+  function mostrarDetalle($params = [])
+  {
+    $tarea = obtenerTarea($params[0]);
+    echo '<h1>'.$tarea['titulo'].'</h1>';
+    echo '<p>'.$tarea['descripcion'].'</p>';
+    if ($tarea['finalizada'] == 1)
+      echo '<h2> Esta Finalizada </h2>';
+    else
+      echo '<h2> No esta Finalizada </h2>';
   }
 
 ?>

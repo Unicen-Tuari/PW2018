@@ -13,12 +13,22 @@
     return $sentencia->fetchAll();
   }
 
+  function obtenerTarea($id_tarea)
+  {
+    $db = obtenerConexion();
+    $sentencia = $db->prepare( "SELECT * from tarea where id=?");
+    $sentencia->execute([$id_tarea]);
+    return $sentencia->fetch();
+  }
+
   //tarea ['titulo' = > 'lalal', 'descrpcion'=> 'lalala']
   function insertarTarea($tarea)
   {
     $db = obtenerConexion();
+    $db->beginTransaction();
     $sentencia = $db->prepare("INSERT INTO tarea (titulo, descripcion) VALUES (?,?)");
     $sentencia->execute([$tarea['titulo'], $tarea['descripcion']]);
+    $db->commit();
     return $db->lastInsertId();
   }
 
