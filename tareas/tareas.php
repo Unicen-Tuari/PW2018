@@ -5,6 +5,14 @@ DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/
   function mostrarTareas($params = [])
   {
 ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/tareas.css">
+  </head>
+  <body>
 <h1>Lista de Tareas</h1>
 <ul>
     <?php
@@ -12,19 +20,21 @@ DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/
     $tareas = obtenerTareas();
 
     foreach ($tareas as $tarea) {
-      echo '<li>'.$tarea['titulo'].': '.$tarea['descripcion'].' <a href="borrar/'.$tarea['id'].'">Borrar</a></li>';
+      echo '<li';
+      if ($tarea['finalizada'] == 1){
+        echo ' class="tachado"';
+      }
+      echo '>'.$tarea['titulo'].': '.$tarea['descripcion'].' <a href="borrar/'.$tarea['id'].'">Borrar</a> <a href="finalizar/'.$tarea['id'].'">Finalizar</a></li>';
     }
-
-    //for
     ?>
 
 <?php
 
  ?>
 </ul>
-<form … >
-	...
-</form>
+<a href="crear">Crear Tarea</a>
+</body>
+</html>
     <?php
   }
 
@@ -48,12 +58,22 @@ DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/
       'descripcion' => $_POST['descripcion']
     ];
     insertarTarea($tarea);
-    header("Location: ".BASEURL."ver");
+    homePage();
   }
 
   function borrarTarea($params = [])
   {
     deleteTarea($params[0]);
+    homePage();
+  }
+
+  function finalizaTarea($params = [])
+  {
+    finalizarTarea($params[0]);
+    homePage();
+  }
+
+  function homePage(){
     header("Location: ".BASEURL."ver");
   }
 

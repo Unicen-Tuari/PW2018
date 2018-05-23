@@ -4,6 +4,7 @@ $acciones = [
   "ver" => "mostrarTareas",
   "crear" => "crearTarea",
   "guardar" => "guardarTarea",
-  "borrar" => "borrarTarea"
+  "borrar" => "borrarTarea",
+  "finalizar" => "finalizaTarea"
 ];
 ?>
