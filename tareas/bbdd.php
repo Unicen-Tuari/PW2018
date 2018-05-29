@@ -1,7 +1,7 @@
 <?php
   function obtenerConexion(){
     return new PDO('mysql:host=localhost;'
-               .'dbname=db_tareas;charset=utf8'
+               .'dbname=db_tareas_smarty;charset=utf8'
             , 'root', '');
   }
 
