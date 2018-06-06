@@ -1,14 +1,14 @@
 <?php
 
 $acciones = [
-  "" => "login",
-  "login" => "validarLogin",
-  "logout" => "logout",
-  "ver" => "mostrarTareas",
-  "crear" => "crearTarea",
-  "guardar" => "guardarTarea",
-  "borrar" => "borrarTarea",
-  "finalizar" => "finalizaTarea",
-  "detalle" => "mostrarDetalle"
+  "" => "LoginController#login",
+  "login" => "LoginController#validarLogin",
+  "logout" => "LoginController#logout",
+  "ver" => "TareasController#mostrarTareas",
+  "crear" => "TareasController#crearTarea",
+  "guardar" => "TareasController#guardarTarea",
+  "borrar" => "TareasController#borrarTarea",
+  "finalizar" => "TareasController#finalizaTarea",
+  "detalle" => "TareasController#mostrarDetalle"
 ];
 ?>

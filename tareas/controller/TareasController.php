@@ -1,65 +1,27 @@
 <?php
-DEFINE('BASEURL','//'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/');
+require_once "./controller/SecureController.php";
 require_once "./model/TareasModel.php";
 require_once "./view/TareasView.php";
 
-class TareasController {
+class TareasController extends SecureController{
 
   private $tareasModel;
   private $tareasView;
 
   function __construct(){
+
     $this->tareasModel = new TareasModel();
     $this->tareasView = new TareasView();
   }
 
-  function chequearSession(){
-    session_start();
-    if(time() - $_SESSION['ultima_conexion'] > 30){
-        $this->logout();
-    }
-    $_SESSION['ultima_conexion'] = time();
-    if(!isset($_SESSION['email'])){
-      $this->loginPage();
-    }
-  }
-
   function mostrarTareas($params = [])
   {
-    $this->chequearSession();
     $tareas = $this->tareasModel->obtenerTareas();
     $this->tareasView->mostrarTareas($tareas);
   }
 
-  function login($params = [])
-  {
-    $this->tareasView->mostrarLogin();
-  }
-  function logout($params = [])
-  {
-    session_start();
-    session_destroy();
-    $this->loginPage();
-  }
-
-  function validarLogin($params = [])
-  {
-    $usuario = $this->tareasModel->obtenerUsuario($_POST['email']);
-    if(password_verify($_POST['password'], $usuario['password'])){
-      session_start();
-      $_SESSION['email'] = $_POST['email'];
-      $_SESSION['ultima_conexion'] = time();
-      $this->homePage();
-    }
-    else {
-      $this->loginPage();
-    }
-    // $this->tareasView->mostrarLogin();
-  }
-
   function crearTarea($params = [])
   {
-    $this->chequearSession();
     $this->tareasView->mostrarVistaCrearTarea();
   }
 
@@ -70,36 +32,23 @@ class TareasController {
       'descripcion' => $_POST['descripcion']
     ];
     $this->tareasModel->insertarTarea($tarea);
-    $this->homePage();
-  }
-
-  function homePage()
-  {
-    header("Location: ".BASEURL."ver");
-    die();
-  }
-
-  function loginPage()
-  {
-    header("Location: ".BASEURL."");
-    die();
+    PageHelpers::homePage();
   }
 
   function borrarTarea($params = [])
   {
     $this->tareasModel->deleteTarea($params[0]);
-    $this->homePage();
+    PageHelpers::homePage();
   }
 
   function finalizaTarea($params = [])
   {
     $this->tareasModel->finalizarTarea($params[0]);
-    $this->homePage();
+    PageHelpers::homePage();
   }
 
   function mostrarDetalle($params = [])
   {
-    $this->chequearSession();
     $tarea = $this->tareasModel->obtenerTarea($params[0]);
 
     if ($tarea['finalizada'] == 1)

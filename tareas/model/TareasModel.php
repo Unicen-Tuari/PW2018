@@ -10,13 +10,6 @@ class TareasModel {
             , 'root', '');
   }
 
-  function obtenerUsuario($email)
-  {
-    $sentencia = $this->db->prepare( "SELECT * from usuario where email = ?");
-    $sentencia->execute([$email]);
-    return $sentencia->fetch();
-  }
-
   function obtenerTareas()
   {
     $sentencia = $this->db->prepare( "SELECT * from tarea");
