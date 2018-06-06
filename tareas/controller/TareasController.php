@@ -15,6 +15,10 @@ class TareasController {
 
   function chequearSession(){
     session_start();
+    if(time() - $_SESSION['ultima_conexion'] > 30){
+        $this->logout();
+    }
+    $_SESSION['ultima_conexion'] = time();
     if(!isset($_SESSION['email'])){
       $this->loginPage();
     }
@@ -44,6 +48,7 @@ class TareasController {
     if(password_verify($_POST['password'], $usuario['password'])){
       session_start();
       $_SESSION['email'] = $_POST['email'];
+      $_SESSION['ultima_conexion'] = time();
       $this->homePage();
     }
     else {
