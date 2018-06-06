@@ -31,6 +31,12 @@ class TareasController {
   {
     $this->tareasView->mostrarLogin();
   }
+  function logout($params = [])
+  {
+    session_start();
+    session_destroy();
+    $this->loginPage();
+  }
 
   function validarLogin($params = [])
   {

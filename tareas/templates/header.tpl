@@ -11,3 +11,4 @@
     <link rel="stylesheet" href="css/tareas.css">
   </head>
   <body>
+  <a href="logout">Logout</a>
