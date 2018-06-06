@@ -13,8 +13,16 @@ class TareasController {
     $this->tareasView = new TareasView();
   }
 
+  function chequearSession(){
+    session_start();
+    if(!isset($_SESSION['email'])){
+      $this->loginPage();
+    }
+  }
+
   function mostrarTareas($params = [])
   {
+    $this->chequearSession();
     $tareas = $this->tareasModel->obtenerTareas();
     $this->tareasView->mostrarTareas($tareas);
   }
@@ -28,6 +36,8 @@ class TareasController {
   {
     $usuario = $this->tareasModel->obtenerUsuario($_POST['email']);
     if(password_verify($_POST['password'], $usuario['password'])){
+      session_start();
+      $_SESSION['email'] = $_POST['email'];
       $this->homePage();
     }
     else {
@@ -38,6 +48,7 @@ class TareasController {
 
   function crearTarea($params = [])
   {
+    $this->chequearSession();
     $this->tareasView->mostrarVistaCrearTarea();
   }
 
@@ -54,11 +65,13 @@ class TareasController {
   function homePage()
   {
     header("Location: ".BASEURL."ver");
+    die();
   }
 
   function loginPage()
   {
     header("Location: ".BASEURL."");
+    die();
   }
 
   function borrarTarea($params = [])
@@ -75,6 +88,7 @@ class TareasController {
 
   function mostrarDetalle($params = [])
   {
+    $this->chequearSession();
     $tarea = $this->tareasModel->obtenerTarea($params[0]);
 
     if ($tarea['finalizada'] == 1)
