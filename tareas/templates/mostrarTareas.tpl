@@ -1,4 +1,5 @@
 {include file="header.tpl"}
+<h1>Lista de Tareas</h1>
 <ul>
 
   {foreach from=$tareas item=tarea}

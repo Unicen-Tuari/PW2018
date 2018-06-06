@@ -19,6 +19,23 @@ class TareasController {
     $this->tareasView->mostrarTareas($tareas);
   }
 
+  function login($params = [])
+  {
+    $this->tareasView->mostrarLogin();
+  }
+
+  function validarLogin($params = [])
+  {
+    $usuario = $this->tareasModel->obtenerUsuario($_POST['email']);
+    if(password_verify($_POST['password'], $usuario['password'])){
+      $this->homePage();
+    }
+    else {
+      $this->loginPage();
+    }
+    // $this->tareasView->mostrarLogin();
+  }
+
   function crearTarea($params = [])
   {
     $this->tareasView->mostrarVistaCrearTarea();
@@ -37,6 +54,11 @@ class TareasController {
   function homePage()
   {
     header("Location: ".BASEURL."ver");
+  }
+
+  function loginPage()
+  {
+    header("Location: ".BASEURL."");
   }
 
   function borrarTarea($params = [])

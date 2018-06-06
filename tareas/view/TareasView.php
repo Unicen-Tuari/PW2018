@@ -8,6 +8,10 @@ class TareasView {
     $this->smarty = new Smarty;
   }
 
+  function mostrarLogin(){
+    $this->smarty->display("login.tpl");
+  }
+
   function mostrarTareas($tareas){
      $this->smarty->assign("tareas", $tareas);
      $this->smarty->display("mostrarTareas.tpl");
